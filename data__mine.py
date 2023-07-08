@@ -15,7 +15,6 @@ FILENAME = "chicken.json"
 class User(pydantic.BaseModel):
     username: str
     password: str
-    # command + / all delete command
 
     @pydantic.validator("username")
     def username_valid(cls, value):
@@ -44,7 +43,6 @@ class Eat(pydantic.BaseModel):
     total_chicken: float
     total_rice: float
     date: datetime = datetime.utcnow()
-    # TODO: BURDA BUG VAR  OR KISMI HATALI FAZLADAN İF EKLNECEK (NEGATİF KONTROL)
 
     @pydantic.root_validator()
     def check_values(cls, values):
@@ -136,13 +134,6 @@ def user_buy_history(user: User, all: t.List["Buy"]):
     return user_special
 
 
-# def user_all_buy_history(all: t.List["Buy"]):
-#     user_special: t.List["Buy"] = []
-#     for buy in all:
-#         user_special.append(buy)
-#     return user_special
-
-
 # TODO: İLKERİN aldığı TAVUK BİTTİ
 
 # NOTE: True -> Chicken
@@ -173,10 +164,11 @@ def algorithm_of_chicken(db: Database):
 
 def algorithm_of_rice(db: Database):
     id = find_rice(db)
-    print(id)
+
     rice_debt = []
     total_eat_rice = db.eat[-1].total_rice
     for fucking in range(len(list(item.username for item in db.buy))):
+
         rem_rice = (db.buy[id].buy_rice - db.buy[id].eaten_rice)
         if total_eat_rice <= rem_rice:
             procces_amount = total_eat_rice
@@ -192,11 +184,14 @@ def algorithm_of_rice(db: Database):
 
     return rice_debt, id, total_eat_rice
 
-#TODO:SAME FİND RİCE
+
 def find_chicken(db: Database):
     id = 0
+    _, chicken = total(db)
+    if chicken == 0:
+        return id
     for i in db.buy:
-        if i.buy_chicken != i.eaten_chicken:
+        if i.buy_chicken != i.eaten_chicken and not (i.buy_chicken == 0 and i.eaten_chicken == 0):
             break
         else:
             id += 1
@@ -210,7 +205,7 @@ def find_rice(db: Database):
     if rice == 0:
         return id
     for i in db.buy:
-        print(i)
+
         if i.buy_rice != i.eaten_rice and not (i.buy_rice == 0 and i.eaten_rice == 0):
             break
         else:
@@ -257,7 +252,6 @@ def debt_printer(db: Database, chicken_or_rice_debt_list: list, id: int, rice_or
     return db
 
 
-# NOTE:CHANGE SUM ELEMENTS
 def debt_user_elements(lst: list, i: int):
     total = []
     for sublist in lst:
@@ -295,7 +289,7 @@ def pay_off(db: Database, username: str, buyer: str, amount: float):
     db.debt.append(debt)
     return db
 
-#TODO: KARŞIKLIKLI BORÇLARI TOPLA
+
 def sum_debts(db: Database):
     debt_totals = {}
     for debt in db.debt:
@@ -308,3 +302,13 @@ def sum_debts(db: Database):
         else:
             debt_totals[key] = amount
     return debt_totals
+
+
+def exchange_api(amount: float, from_currency: str, to_currency: str):
+    from_currency = from_currency.upper()
+    to_currency = to_currency.upper()
+    amount = amount
+    response = requests.get(
+        f"https://api.frankfurter.app/latest?amount={amount}&from={from_currency}&to={to_currency}")
+
+    return float(response.json()['rates'][to_currency])

@@ -8,27 +8,7 @@
       "eaten_rice": 0.0,
       "per_chicken": 0.1,
       "per_rice": 0.0,
-      "date": "2023-07-07T11:56:40.143168"
-    },
-    {
-      "username": "user3",
-      "buy_rice": 0.0,
-      "buy_chicken": 1800.0,
-      "eaten_chicken": 1800.0,
-      "eaten_rice": 0.0,
-      "per_chicken": 0.06,
-      "per_rice": 0.0,
-      "date": "2023-07-07T12:25:43.924339"
-    },
-    {
-      "username": "user1",
-      "buy_rice": 0.0,
-      "buy_chicken": 3000.0,
-      "eaten_chicken": 3000.0,
-      "eaten_rice": 0.0,
-      "per_chicken": 0.12,
-      "per_rice": 0.0,
-      "date": "2023-07-07T12:29:02.652450"
+      "date": "2023-07-08T15:27:36.398463"
     }
   ],
   "eat": [
@@ -44,44 +24,7 @@
       ],
       "total_chicken": 300.0,
       "total_rice": 0.0,
-      "date": "2023-07-07T12:23:45.651403"
-    },
-    {
-      "username": [
-        "user4",
-        "user5",
-        "user2",
-        "user1"
-      ],
-      "eat_chicken": [
-        400.0,
-        600.0,
-        800.0,
-        200.0
-      ],
-      "eat_rice": [
-        0.0,
-        0.0,
-        0.0,
-        0.0
-      ],
-      "total_chicken": 2000.0,
-      "total_rice": 0.0,
-      "date": "2023-07-07T12:29:31.214886"
-    },
-    {
-      "username": [
-        "user1"
-      ],
-      "eat_chicken": [
-        2800.0
-      ],
-      "eat_rice": [
-        0.0
-      ],
-      "total_chicken": 2800.0,
-      "total_rice": 0.0,
-      "date": "2023-07-07T12:32:29.544808"
+      "date": "2023-07-08T15:31:09.101595"
     }
   ],
   "debt": [
@@ -89,55 +32,7 @@
       "buyer": "user1",
       "creditor": "user5",
       "amount": 30.0,
-      "date": "2023-07-07T12:23:45.652322"
-    },
-    {
-      "buyer": "user3",
-      "creditor": "user4",
-      "amount": 21.6,
-      "date": "2023-07-07T12:29:31.215716"
-    },
-    {
-      "buyer": "user1",
-      "creditor": "user4",
-      "amount": 4.800000000000001,
-      "date": "2023-07-07T12:29:31.215716"
-    },
-    {
-      "buyer": "user3",
-      "creditor": "user5",
-      "amount": 32.4,
-      "date": "2023-07-07T12:29:31.215716"
-    },
-    {
-      "buyer": "user1",
-      "creditor": "user5",
-      "amount": 7.199999999999999,
-      "date": "2023-07-07T12:29:31.215716"
-    },
-    {
-      "buyer": "user3",
-      "creditor": "user2",
-      "amount": 43.2,
-      "date": "2023-07-07T12:29:31.215716"
-    },
-    {
-      "buyer": "user1",
-      "creditor": "user2",
-      "amount": 9.600000000000001,
-      "date": "2023-07-07T12:29:31.215716"
-    },
-    {
-      "buyer": "user3",
-      "creditor": "user1",
-      "amount": 10.8,
-      "date": "2023-07-07T12:29:31.215716"
-    },
-    {
-      "buyer": "user1",
-      "creditor":"user3" ,
-      "amount": 10.8,
-      "date": "2023-07-07T12:29:31.215716"
+      "date": "2023-07-08T15:31:09.102279"
     }
   ],
   "version": "1.0"

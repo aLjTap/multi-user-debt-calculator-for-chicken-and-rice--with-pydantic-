@@ -1,7 +1,6 @@
 from data__mine import *
 import math
 import requests
-FILENMAE = "chicken.json"
 
 
 any_user = input("Your username:\n")
@@ -29,7 +28,7 @@ db = read_database()
 if not db:
     db = Database(buy=[], eat=[], debt=[])
 history = user_buy_history(user, db.buy)
-if history:
+if history == []:
     _ago = None
 else:
     _ago = round((datetime.utcnow() - history[-1].date).total_seconds()/3600)
@@ -174,17 +173,10 @@ if any_choose == "5":
         key = f"{Users[user]}-{any_user}"
         if key in sum_debts_dict and sum_debts_dict[key] != 0:
 
-            from_currency = "TRY"
-
-            to_currency = "USD"
-
-            amount = sum_debts_dict[key]
-
-            response = requests.get(
-                f"https://api.frankfurter.app/latest?amount={amount}&from={from_currency}&to={to_currency}")
+            new_amount = exchange_api(sum_debts_dict[key], "TRY", "USD")
 
             print(
-                f"buyer -> {Users[user]}- creditor ->{any_user} = {sum_debts_dict[key]} {from_currency} -> {response.json()['rates'][to_currency]} {to_currency} ")
+                f"buyer -> {Users[user]}- creditor ->{any_user} = {sum_debts_dict[key]} TRY -> {new_amount} USD ")
 
             buyer_list.append(Users[user])
     contunie = input("would you like to pay\n"
@@ -198,7 +190,7 @@ if any_choose == "5":
             i += 1
 
     if contunie == "3":
-        print("are you a pool 🤨🤨🤨")
+        print("are you a poor 🤨🤨🤨")
         exit(0)
     buyer_choose = input("Who do you want to repay your debt to?\n")
     key_buyer = f"{buyer_list[int(buyer_choose)]}-{any_user}"
@@ -209,16 +201,9 @@ if any_choose == "5":
                              "2 - pay as you want\n"
                              "3 - Cancel\n")
     if contunie == "2":
-        from_currency = "TRY"
+        new_amount = exchange_api(sum_debts_dict[key_buyer], "TRY", "USD")
 
-        to_currency = "USD"
-
-        amount = sum_debts_dict[key_buyer]
-
-        response = requests.get(
-            f"https://api.frankfurter.app/latest?amount={amount}&from={from_currency}&to={to_currency}")
-
-        are_you_sure = input(f"Your debt is {response.json()['rates'][to_currency]} USD \n"
+        are_you_sure = input(f"Your debt is {new_amount} USD \n"
 
                              "1 - Pay all\n"
                              "2 - pay as you want\n"
@@ -230,18 +215,11 @@ if any_choose == "5":
         print("🫴🫴🫴🫴")
 
     if are_you_sure == "2" and contunie == "2":
-        from_currency = "USD"
-
-        to_currency = "TRY"
-
-        amount = input("how much do you want to pay?\n")
-
-        response = requests.get(
-            f"https://api.frankfurter.app/latest?amount={amount}&from={from_currency}&to={to_currency}")
 
         write_database(pay_off(db, any_user, buyer_list[int(
-            buyer_choose)], float(response.json()['rates'][to_currency])))
+            buyer_choose)], exchange_api(sum_debts_dict[key_buyer], "USD", "TRY")))
         print("🫴🫴🫴🫴")
+
     if are_you_sure == "2" and contunie == "1":
         per_debt = input("how much do you want to pay?\n")
         write_database(pay_off(db, any_user, buyer_list[int(
