@@ -16,11 +16,11 @@ Methods = {
     6: "exit"
 }
 Users = {
-    1: "Mehmet",
-    2: "Ali",
-    3: "Nasir",
-    4: "ilker",
-    5: "Ferhat",
+    1: "user1",
+    2: "user2",
+    3: "user3",
+    4: "user4",
+    5: "user5",
     6: "exit"
 
 }
