@@ -264,9 +264,13 @@ def eaten_chicken_printer(db: Database, id: int, total_eat_chicken: float):
     i = find_chicken(db)
     while i != id:
         db.buy[i].eaten_chicken = db.buy[i].buy_chicken
+        print(f"The chicken that {db.buy[i].username} bought is finished ")
         i += 1
     if id == i:
         db.buy[i].eaten_chicken = db.buy[i].buy_chicken + total_eat_chicken
+        if db.buy[i].eaten_chicken == db.buy[i].buy_chicken :
+            print(f"The chicken that {db.buy[i].username} bought is finished ")
+            
     return db
 
 

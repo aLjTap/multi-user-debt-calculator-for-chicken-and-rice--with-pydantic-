@@ -4,7 +4,7 @@
       "username": "user1",
       "buy_rice": 0.0,
       "buy_chicken": 300.0,
-      "eaten_chicken": 300.0,
+      "eaten_chicken": 200.0,
       "eaten_rice": 0.0,
       "per_chicken": 0.1,
       "per_rice": 0.0,
@@ -14,25 +14,25 @@
   "eat": [
     {
       "username": [
-        "user5"
+        "user2"
       ],
       "eat_chicken": [
-        300.0
+        200.0
       ],
       "eat_rice": [
         0.0
       ],
-      "total_chicken": 300.0,
+      "total_chicken": 200.0,
       "total_rice": 0.0,
-      "date": "2023-07-08T15:31:09.101595"
+      "date": "2023-07-08T18:52:16.698234"
     }
   ],
   "debt": [
     {
       "buyer": "user1",
-      "creditor": "user5",
-      "amount": 30.0,
-      "date": "2023-07-08T15:31:09.102279"
+      "creditor": "user2",
+      "amount": 20.0,
+      "date": "2023-07-08T18:52:16.699038"
     }
   ],
   "version": "1.0"
