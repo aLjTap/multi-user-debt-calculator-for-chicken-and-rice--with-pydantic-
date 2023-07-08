@@ -33,6 +33,12 @@
       "creditor": "user2",
       "amount": 20.0,
       "date": "2023-07-08T18:52:16.699038"
+    },
+    {
+      "buyer": "user1",
+      "creditor": "user2",
+      "amount": -19.8117,
+      "date": "2023-07-08T19:05:19.741092"
     }
   ],
   "version": "1.0"

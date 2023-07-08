@@ -215,9 +215,9 @@ if any_choose == "5":
         print("🫴🫴🫴🫴")
 
     if are_you_sure == "2" and contunie == "2":
-
+        per_debt = input("how much do you want to pay?\n")
         write_database(pay_off(db, any_user, buyer_list[int(
-            buyer_choose)], exchange_api(sum_debts_dict[key_buyer], "USD", "TRY")))
+            buyer_choose)], exchange_api(float(per_debt), "USD", "TRY")))
         print("🫴🫴🫴🫴")
 
     if are_you_sure == "2" and contunie == "1":
