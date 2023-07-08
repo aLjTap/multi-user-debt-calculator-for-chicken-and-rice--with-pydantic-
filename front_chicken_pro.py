@@ -167,6 +167,7 @@ if any_choose == "4":
                 f"{db.eat[-1].username[item] } -> {db.eat[-1].eat_rice[item]} gr rice")
 if any_choose == "5":
     sum_debts_dict = sum_debts(db)
+
     buyer_list = []
     are_you_sure = ""
     for user in Users:
@@ -179,6 +180,9 @@ if any_choose == "5":
                 f"buyer -> {Users[user]}- creditor ->{any_user} = {sum_debts_dict[key]} TRY -> {new_amount} USD ")
 
             buyer_list.append(Users[user])
+        if buyer_list == []:
+            print("you dont have a any debt")
+            exit(0)
     contunie = input("would you like to pay\n"
                      "1 - Yes with TRY\n"
                      "2 - Yes with USD\n"

@@ -300,10 +300,18 @@ def sum_debts(db: Database):
         creditor = debt.creditor
         amount = debt.amount
         key = f"{buyer}-{creditor}"
+        key_op = f"{creditor}-{buyer}"
         if key in debt_totals:
             debt_totals[key] += amount
         else:
             debt_totals[key] = amount
+        if key_op in debt_totals and key in debt_totals:
+            if debt_totals[key] >= debt_totals[key_op]:
+                debt_totals[key] -= debt_totals[key_op]
+                debt_totals[key_op]= 0
+            if debt_totals[key] < debt_totals[key_op]:
+               debt_totals[key_op] -= debt_totals[key]
+               debt_totals[key] = 0 
     return debt_totals
 
 
