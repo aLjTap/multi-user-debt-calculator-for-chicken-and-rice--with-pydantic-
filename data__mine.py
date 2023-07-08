@@ -134,7 +134,6 @@ def user_buy_history(user: User, all: t.List["Buy"]):
     return user_special
 
 
-# TODO: İLKERİN aldığı TAVUK BİTTİ
 
 # NOTE: True -> Chicken
 # NOTE: False -> Rice
