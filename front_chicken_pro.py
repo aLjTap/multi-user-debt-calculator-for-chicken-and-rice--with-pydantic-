@@ -12,26 +12,18 @@ Methods = {
     3: "see purchase history",
     4: "see eat history",
     5: "payy of bitch",
-    6: "exit"
+    6: "exit",
 }
-Users = {
-    1: "user1",
-    2: "user2",
-    3: "user3",
-    4: "user4",
-    5: "user5",
-    6: "exit"
-
-}
+Users = {1: "user1", 2: "user2", 3: "user3", 4: "user4", 5: "user5", 6: "exit"}
 
 db = read_database()
 if not db:
     db = Database(buy=[], eat=[], debt=[])
-history = user_buy_history(user, db.buy)
+history = user_buy_history(user.username, db.buy)
 if history == []:
     _ago = None
 else:
-    _ago = round((datetime.utcnow() - history[-1].date).total_seconds()/3600)
+    _ago = round((datetime.utcnow() - history[-1].date).total_seconds() / 3600)
 
 chicken, rice = total(db)
 print(f"hello , we have {chicken} gr chicken and {rice} gr rice")
@@ -43,6 +35,7 @@ eating_rice = []
 eating_chicken = []
 username = ""
 user_number = 0
+
 if any_choose == "1":
     while username != Users[6]:
         if user_number != 0:
@@ -56,8 +49,7 @@ if any_choose == "1":
 
             any_username.append(username)
 
-            chicken_amount = float(
-                input("How much chicken do you want to eat?:\n"))
+            chicken_amount = float(input("How much chicken do you want to eat?:\n"))
             rice_amount = float(input("How much rice do you want to eat?:\n"))
             eating_rice.append(rice_amount)
             eating_chicken.append(chicken_amount)
@@ -65,21 +57,17 @@ if any_choose == "1":
     sum_rice = sum(eating_rice)
     sum_chicken = sum(eating_chicken)
     eat = Eat(
-
-
         username=any_username,
         eat_chicken=eating_chicken,
         eat_rice=eating_rice,
         total_chicken=sum_chicken,
-        total_rice=sum_rice
-
+        total_rice=sum_rice,
     )
 
     try:
         if chicken >= sum_chicken and rice >= sum_rice:
             db.eat.append(eat)
-            chicken_debt, id_chicken, total_eat_chicken = algorithm_of_chicken(
-                db)
+            chicken_debt, id_chicken, total_eat_chicken = algorithm_of_chicken(db)
             rice_debt, id_rice, total_eat_rice = algorithm_of_rice(db)
 
             db = debt_printer(db, chicken_debt, id_chicken, True)
@@ -94,22 +82,19 @@ if any_choose == "1":
     except Exception as e:
         raise
 
-
 if any_choose == "2":
 
     try:
-        if _ago is None or _ago >= 3:
+        if _ago is None or _ago >= 0:
             buying_rice = float(input("How much rice do you want to buy?:\n"))
             if buying_rice != 0.0:
                 price_rice = float(input("how much did you get the rice\n"))
             else:
                 price_rice = 0
                 buying_rice = 1
-            buying_chicken = float(
-                input("How much chicken do you want to buy?:\n"))
+            buying_chicken = float(input("How much chicken do you want to buy?:\n"))
             if buying_chicken != 0.0:
-                price_chicken = float(
-                    input("how much did you get the chicken\n"))
+                price_chicken = float(input("how much did you get the chicken\n"))
             else:
                 price_chicken = 0
                 buying_chicken = 1
@@ -121,6 +106,7 @@ if any_choose == "2":
                 eaten_rice=0.0,
                 per_chicken=price_chicken / buying_chicken,
                 per_rice=price_rice / buying_rice,
+                date=datetime.now(timezone.utc),
             )
 
             db.buy.append(buy)
@@ -133,38 +119,43 @@ if any_choose == "2":
 if any_choose == "3":
 
     if _ago == 0:
-        print((datetime.utcnow() - history[-1].date).total_seconds()/60)
+        print((datetime.utcnow() - history[-1].date).total_seconds() / 60)
         print(
-            f"your last purchase {history[-1].buy_chicken} gr  chicken {int((datetime.utcnow() - history[-1].date).total_seconds()/60)} minutes ago")
+            f"your last purchase {history[-1].buy_chicken} gr  chicken {int((datetime.utcnow() - history[-1].date).total_seconds()/60)} minutes ago"
+        )
     if _ago != None and _ago != 0:
 
         print(
-            f"your last purchas {history[-1].buy_chicken} gr  chicken {_ago} hour ago")
+            f"your last purchas {history[-1].buy_chicken} gr  chicken {_ago} hour ago"
+        )
     if _ago == None:
         print("you have not made a recent purchase\n")
 
 if any_choose == "4":
 
-    eat_ago = round(
-        (datetime.utcnow() - db.eat[-1].date).total_seconds()/3600)
+    eat_ago = round((datetime.utcnow() - db.eat[-1].date).total_seconds() / 3600)
     if eat_ago == 0:
-        print(f"{db.eat[-1].total_chicken} gr chicken and {db.eat[-1].total_rice} gr rice {int((datetime.utcnow() - db.eat[-1].date).total_seconds()/60)} minute ago by {db.eat[-1].username} ")
+        print(
+            f"{db.eat[-1].total_chicken} gr chicken and {db.eat[-1].total_rice} gr rice {int((datetime.utcnow() - db.eat[-1].date).total_seconds()/60)} minute ago by {db.eat[-1].username} "
+        )
     else:
         print(
-            f"{db.eat[-1].total_chicken} gr chicken  and {db.eat[-1].total_rice} gr rice {eat_ago} hour ago by {db.eat[-1].username} ")
+            f"{db.eat[-1].total_chicken} gr chicken  and {db.eat[-1].total_rice} gr rice {eat_ago} hour ago by {db.eat[-1].username} "
+        )
 
-    contunie = input("would you like to see the details\n"
-                     "1 - Yes\n"
-                     "2 - NO\n")
+    contunie = input("would you like to see the details\n" "1 - Yes\n" "2 - NO\n")
     if contunie == "1":
         print("\nchicken quantities : \n")
         for item in range(len(db.eat[-1].username)):
             print(
-                f"{db.eat[-1].username[item] } -> {db.eat[-1].eat_chicken[item]} gr chicken ")
+                f"{db.eat[-1].username[item] } -> {db.eat[-1].eat_chicken[item]} gr chicken "
+            )
         print("\nrice quantities : \n")
         for item in range(len(db.eat[-1].username)):
             print(
-                f"{db.eat[-1].username[item] } -> {db.eat[-1].eat_rice[item]} gr rice")
+                f"{db.eat[-1].username[item] } -> {db.eat[-1].eat_rice[item]} gr rice"
+            )
+
 if any_choose == "5":
     sum_debts_dict = sum_debts(db)
 
@@ -177,16 +168,16 @@ if any_choose == "5":
             new_amount = exchange_api(sum_debts_dict[key], "TRY", "USD")
 
             print(
-                f"buyer -> {Users[user]}- creditor ->{any_user} = {sum_debts_dict[key]} TRY -> {new_amount} USD ")
+                f"buyer -> {Users[user]}- creditor ->{any_user} = {sum_debts_dict[key]} TRY -> {new_amount} USD "
+            )
 
             buyer_list.append(Users[user])
         if buyer_list == []:
             print("you dont have a any debt")
             exit(0)
-    contunie = input("would you like to pay\n"
-                     "1 - Yes with TRY\n"
-                     "2 - Yes with USD\n"
-                     "3 - NO\n")
+    contunie = input(
+        "would you like to pay\n" "1 - Yes with TRY\n" "2 - Yes with USD\n" "3 - NO\n"
+    )
     if contunie == "1" or contunie == "2":
         i = 0
         for buyer in buyer_list:
@@ -199,35 +190,47 @@ if any_choose == "5":
     buyer_choose = input("Who do you want to repay your debt to?\n")
     key_buyer = f"{buyer_list[int(buyer_choose)]}-{any_user}"
     if contunie == "1":
-        are_you_sure = input(f"Your debt is {sum_debts_dict[key_buyer] } TRY\n"
-
-                             "1 - Pay all\n"
-                             "2 - pay as you want\n"
-                             "3 - Cancel\n")
+        are_you_sure = input(
+            f"Your debt is {sum_debts_dict[key_buyer] } TRY\n"
+            "1 - Pay all\n"
+            "2 - pay as you want\n"
+            "3 - Cancel\n"
+        )
     if contunie == "2":
         new_amount = exchange_api(sum_debts_dict[key_buyer], "TRY", "USD")
 
-        are_you_sure = input(f"Your debt is {new_amount} USD \n"
-
-                             "1 - Pay all\n"
-                             "2 - pay as you want\n"
-                             "3 - Cancel\n")
+        are_you_sure = input(
+            f"Your debt is {new_amount} USD \n"
+            "1 - Pay all\n"
+            "2 - pay as you want\n"
+            "3 - Cancel\n"
+        )
 
     if are_you_sure == "1":
-        write_database(pay_off(db, any_user, buyer_list[int(
-            buyer_choose)], sum_debts_dict[key_buyer]))
+        write_database(
+            pay_off(
+                db, any_user, buyer_list[int(buyer_choose)], sum_debts_dict[key_buyer]
+            )
+        )
         print("🫴🫴🫴🫴")
 
     if are_you_sure == "2" and contunie == "2":
         per_debt = input("how much do you want to pay?\n")
-        write_database(pay_off(db, any_user, buyer_list[int(
-            buyer_choose)], exchange_api(float(per_debt), "USD", "TRY")))
+        write_database(
+            pay_off(
+                db,
+                any_user,
+                buyer_list[int(buyer_choose)],
+                exchange_api(float(per_debt), "USD", "TRY"),
+            )
+        )
         print("🫴🫴🫴🫴")
 
     if are_you_sure == "2" and contunie == "1":
         per_debt = input("how much do you want to pay?\n")
-        write_database(pay_off(db, any_user, buyer_list[int(
-            buyer_choose)], float(per_debt)))
+        write_database(
+            pay_off(db, any_user, buyer_list[int(buyer_choose)], float(per_debt))
+        )
         print("🫴🫴🫴🫴")
     if are_you_sure == "3":
         print("ne dedi ne dedi ✋✋✋")
